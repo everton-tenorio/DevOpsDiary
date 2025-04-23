@@ -36,7 +36,7 @@
       </div>
       
       <!-- Project Content -->
-      <div class="bg-gray-900 p-6 rounded-lg mb-8">
+      <div class="bg-gray-900 text-[#E6EDF3] p-6 rounded-lg mb-8">
         <h2 class="text-xl font-mono font-bold text-terminal-green mb-4">Overview</h2>
         <p class="mb-6">{{ project.overview }}</p>
         
@@ -78,7 +78,7 @@
       </div>
       
       <!-- Submission -->
-      <div class="bg-gray-900 p-6 rounded-lg mb-8">
+      <div class="bg-gray-900 text-[#E6EDF3] p-6 rounded-lg mb-8">
         <h2 class="text-xl font-mono font-bold text-terminal-green mb-4">Submit Your Solution</h2>
         <p class="mb-4">
           Completed this project? Share your solution with the community!
@@ -106,7 +106,7 @@
         </div>
       </div>
       
-      <!-- Community Solutions -->
+      <!-- Community Solutions --
       <div class="bg-gray-900 p-6 rounded-lg">
         <h2 class="text-xl font-mono font-bold text-terminal-green mb-4">Community Solutions</h2>
         <p v-if="!project.communitySolutions || project.communitySolutions.length === 0" class="italic text-gray-500">
@@ -125,7 +125,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -305,3 +305,8 @@ onMounted(async () => {
   }
 });
 </script>
+
+
+<style scoped>
+span {color: #E6EDF3}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-terminal-black-light border border-terminal-green/20 rounded-lg overflow-hidden h-full flex flex-col transition-all duration-300 transform hover:scale-102 hover:border-terminal-green/60 group">
+  <div class="bg-terminal-black border border-terminal-green/20 rounded-lg overflow-hidden h-full flex flex-col transition-all duration-300 transform hover:scale-102 hover:border-terminal-green/60 group">
     <!-- Header with difficulty indicator -->
     <div class="px-5 py-4 flex items-center justify-between border-b border-terminal-green/20">
       <h3 class="text-lg font-mono font-bold text-terminal-white group-hover:text-terminal-green transition-colors duration-200">
@@ -69,4 +69,6 @@ const props = defineProps({
   --tw-scale-x: 1.02;
   --tw-scale-y: 1.02;
 }
+
+span { color: #E6EDF3 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-terminal-black text-terminal-white min-h-screen flex flex-col font-sans relative overflow-hidden">
+  <div class="bg-white min-h-screen flex flex-col font-sans relative overflow-hidden">
     <!-- Background Grid Pattern -->
     <div class="absolute inset-0 bg-grid-pattern bg-grid opacity-10 pointer-events-none"></div>
     
@@ -25,7 +25,7 @@ import Footer from './components/Footer.vue';
 body {
   font-family: 'Inter', sans-serif;
   background-color: #0A0E14;
-  color: #E6EDF3;
+  color: #000000a2;
   margin: 0;
   padding: 0;
 }

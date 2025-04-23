@@ -2,22 +2,19 @@
   <div class="max-w-3xl mx-auto">
     <h1 class="text-3xl font-mono font-bold text-terminal-green mb-8">About #DevOpsDiary</h1>
     
-    <div class="bg-gray-900 p-6 rounded-lg mb-8">
+    <div class="bg-gray-900 text-[#E6EDF3] p-6 rounded-lg mb-8">
       <h2 class="text-xl font-mono font-bold text-terminal-green mb-4">
         <span class="text-terminal-green mr-2">></span> Our Story
       </h2>
       <p class="mb-4">
-        DevOpsDiary began as a hashtag on X, where DevOps enthusiasts shared their learning journeys. 
-        It has evolved into a community-driven platform that provides hands-on projects to help developers 
-        learn and practice DevOps skills.
+        Hi, @evertonx93 here. DevOpsDiary started as a hashtag on X, where I began sharing my DevOps studies and personal projects. It has evolved into a community-driven platform that provides hands-on projects to help developers learn and practice DevOps skills.
       </p>
       <p class="mb-4">
-        Our mission is simple: provide practical, hands-on DevOps learning opportunities that are accessible to everyone. 
-        No paywalls, no subscriptions, just open-source knowledge sharing.
+        The mission is simple: to provide practical DevOps learning opportunities that are accessible to everyone. No paywalls, no subscriptions, just open-source knowledge sharing.
       </p>
     </div>
     
-    <div class="bg-gray-900 p-6 rounded-lg mb-8">
+    <div class="bg-gray-900 text-[#E6EDF3] p-6 rounded-lg mb-8">
       <h2 class="text-xl font-mono font-bold text-terminal-green mb-4">
         <span class="text-terminal-green mr-2">></span> Our Principles
       </h2>
@@ -41,7 +38,7 @@
       </ul>
     </div>
     
-    <div class="bg-gray-900 p-6 rounded-lg mb-8">
+    <div class="bg-gray-900 p-6 text-[#E6EDF3] rounded-lg mb-8">
       <h2 class="text-xl font-mono font-bold text-terminal-green mb-4">
         <span class="text-terminal-green mr-2">></span> Contribute
       </h2>
@@ -58,7 +55,7 @@
       </a>
     </div>
     
-    <div class="bg-gray-900 p-6 rounded-lg">
+    <div class="bg-gray-900 p-6 text-[#E6EDF3] rounded-lg">
       <h2 class="text-xl font-mono font-bold text-terminal-green mb-4">
         <span class="text-terminal-green mr-2">></span> Support the Project
       </h2>

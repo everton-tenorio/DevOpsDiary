@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center text-center">
     <!-- Hero Section -->
-    <div class="w-full max-w-4xl py-16 px-4">
+    <div class="w-full max-w-4xl py-10 px-4">
       <h1 class="text-4xl md:text-6xl font-mono font-bold text-terminal-green mb-8">
         #DevOpsDiary
       </h1>
@@ -27,17 +27,17 @@
         <h2 class="text-2xl font-mono font-bold text-terminal-green mb-4">How It Works</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          <div class="flex flex-col items-center">
+          <div class="flex flex-col items-center info-project">
             <div class="text-4xl text-terminal-green mb-4">01</div>
             <p>Pick a project that matches your skill level</p>
           </div>
           
-          <div class="flex flex-col items-center">
+          <div class="flex flex-col items-center info-project">
             <div class="text-4xl text-terminal-green mb-4">02</div>
             <p>Build the project following the step-by-step guide</p>
           </div>
           
-          <div class="flex flex-col items-center">
+          <div class="flex flex-col items-center info-project">
             <div class="text-4xl text-terminal-green mb-4">03</div>
             <p>Share on GitHub or X with #DevOpsDiary</p>
           </div>
@@ -65,3 +65,19 @@ const levels = [
   { name: 'Advanced', path: '/advanced' }
 ];
 </script>
+
+<style scoped>
+.info-project{ color: #E6EDF3 }
+
+.terminal-button {
+  background: #ffffffd2; 
+  border-radius: 30px;
+  font-weight: bold;
+}
+
+.terminal-button:hover {
+  background:#4ade80;
+  border-radius: 30px;
+  font-weight: bold;
+}
+</style>

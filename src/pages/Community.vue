@@ -2,7 +2,7 @@
   <div class="max-w-4xl mx-auto">
     <h1 class="text-3xl font-mono font-bold text-terminal-green mb-8">Community Projects</h1>
     
-    <div class="bg-gray-900 p-6 rounded-lg mb-8">
+    <div class="bg-gray-900 text-[#E6EDF3] p-6 rounded-lg mb-8">
       <h2 class="text-xl font-mono font-bold text-terminal-green mb-4">
         Join the #DevOpsDiary Community
       </h2>
@@ -57,7 +57,7 @@
             Submitted by <span class="text-terminal-white">@{{ submission.username }}</span>
           </div>
           
-          <p class="mb-4">{{ submission.description }}</p>
+          <p class="mb-4 text-[#E6EDF3]">{{ submission.description }}</p>
           
           <div class="flex space-x-4">
             <a :href="submission.githubUrl" target="_blank" class="text-terminal-green hover:underline flex items-center">

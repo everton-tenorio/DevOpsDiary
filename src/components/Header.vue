@@ -63,9 +63,6 @@ const isMenuOpen = ref(false);
 
 const navLinks = [
   { name: 'Home', path: '/' },
-  { name: 'Beginner', path: '/beginner' },
-  { name: 'Intermediate', path: '/intermediate' },
-  { name: 'Advanced', path: '/advanced' },
   { name: 'Community', path: '/community' },
   { name: 'About', path: '/about' }
 ];
