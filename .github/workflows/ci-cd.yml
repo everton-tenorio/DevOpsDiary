@@ -34,8 +34,13 @@ jobs:
       - name: Validate Projects
         run: node scripts/validate-projects.js
 
-      - name: Build
-        run: npm run build
+      - name: Build Site
+	run: |
+	  if [ "${{ github.ref }}" = "refs/heads/develop" ]; then
+	    npm run build:preview
+	  else
+	    npm run build
+	  fi
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4

@@ -1,16 +1,23 @@
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import path from 'path';
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import path from 'path'
 
-const isPreview = process.env.VITE_PREVIEW === 'true';
+export default defineConfig(({ mode }) => {
+  // vamos usar um modo "preview" para o build de develop
+  const isPreview = mode === 'preview'
 
-export default defineConfig({
-  plugins: [vue()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
+  return {
+    plugins: [vue()],
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+      },
     },
-  },
-  assetsInclude: ['**/*.md'],
-  base: isPreview ? '/DevOpsDiary/develop/' : '/DevOpsDiary/',
-});
+    assetsInclude: ['**/*.md'],
+    // base diferente para main x develop
+    base: isPreview
+      ? '/DevOpsDiary/develop/'   // preview
+      : '/DevOpsDiary/',          // produção
+  }
+})
+
