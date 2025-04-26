@@ -12,7 +12,7 @@
       </p>
       <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
         <a 
-          href="https://github.com/yourusername/DevOpsDiary/issues/new" 
+          href="https://github.com/everton-tenorio/DevOpsDiary/issues/new" 
           target="_blank"
           class="terminal-button"
         >

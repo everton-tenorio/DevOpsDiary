@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import App from './App.vue';
 import './assets/tailwind.css';
+import 'highlight.js/styles/github-dark.css';
 
 // Pages
 import Home from './pages/Home.vue';

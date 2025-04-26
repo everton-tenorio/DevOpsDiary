@@ -29,6 +29,11 @@
           >
             {{ link.name }}
           </router-link>
+          <iframe src="https://github.com/sponsors/everton-tenorio/button" 
+            title="Sponsor everton-tenorio" 
+            height="32" width="114" 
+            style="border: 0; border-radius: 6px; margin-top:-5px">
+          </iframe>
         </nav>
       </div>
       
@@ -48,6 +53,11 @@
           >
             {{ link.name }}
           </router-link>
+          <iframe src="https://github.com/sponsors/everton-tenorio/button" 
+            title="Sponsor everton-tenorio" 
+            height="32" width="114" 
+            style="border: 0; border-radius: 6px; margin-top:20px">
+          </iframe>
         </nav>
       </div>
     </div>

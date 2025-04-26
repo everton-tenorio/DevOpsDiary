@@ -10,6 +10,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  assetsInclude: ['**/*.md'],
   // Base URL for GitHub Pages deployment
   base: '/',
 });

@@ -47,7 +47,7 @@
         Help us improve existing projects, add new ones, or enhance the platform itself.
       </p>
       <a 
-        href="https://github.com/yourusername/DevOpsDiary" 
+        href="https://github.com/everton-tenorio/DevOpsDiary" 
         target="_blank"
         class="terminal-button"
       >
@@ -61,15 +61,20 @@
       </h2>
       <p class="mb-4">
         If you find DevOpsDiary valuable, consider supporting the project. Your support helps
-        maintain the infrastructure and allows us to dedicate more time to creating content.
+        maintain the infrastructure and allows dedicate more time to creating content.
       </p>
-      <a 
+      <iframe src="https://github.com/sponsors/everton-tenorio/button" 
+        title="Sponsor everton-tenorio" 
+        height="32" width="114" 
+        style="border: 0; border-radius: 6px;">
+      </iframe>
+      <!--<a 
         href="https://buymeacoffee.com" 
         target="_blank"
         class="terminal-button"
       >
         Buy Me a Coffee
-      </a>
+      </a>-->
     </div>
   </div>
 </template>

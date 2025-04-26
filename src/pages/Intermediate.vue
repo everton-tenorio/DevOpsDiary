@@ -2,20 +2,20 @@
   <div>
     <div class="max-w-4xl mx-auto">
       <h1 class="text-3xl font-mono font-bold text-terminal-green mb-8">Intermediate DevOps Projects</h1>
-      
       <p class="mb-8">
         Take your skills to the next level with these intermediate projects. Basic knowledge of Docker, Git, and command-line tools recommended.
       </p>
-      
       <div v-if="loading" class="text-center py-12">
         <div class="text-terminal-green font-mono">Loading projects...</div>
       </div>
-      
+      <div v-else-if="error" class="bg-red-900 text-white p-4 rounded mb-8">
+        {{ error }}
+      </div>
       <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <ProjectCard 
-          v-for="project in projects" 
-          :key="project.slug" 
-          :project="project" 
+        <ProjectCard
+          v-for="project in projects"
+          :key="project.slug"
+          :project="project"
           level="intermediate"
         />
       </div>
@@ -28,33 +28,76 @@ import { ref, onMounted } from 'vue';
 import ProjectCard from '../components/ProjectCard.vue';
 
 const loading = ref(true);
+const error = ref(null);
 const projects = ref([]);
 
+// Use Vite's import.meta.glob to get all markdown files in the intermediate directory
+const projectFiles = import.meta.glob('/projects/intermediate/*.md', { as: 'raw' });
+
+// Parse frontmatter from markdown content
+function parseFrontmatter(content) {
+  const frontmatterRegex = /^---\n([\s\S]*?)\n---/;
+  const match = content.match(frontmatterRegex);
+  
+  if (!match) return {};
+  
+  const frontmatter = match[1];
+  const result = {};
+  
+  // Parse title
+  const titleMatch = frontmatter.match(/title:\s*(.*)/);
+  if (titleMatch) result.title = titleMatch[1].trim();
+  
+  // Parse description
+  const descMatch = frontmatter.match(/description:\s*(.*)/);
+  if (descMatch) result.description = descMatch[1].trim();
+  
+  // Parse tags
+  const tagsMatch = frontmatter.match(/tags:\s*\[(.*)\]/);
+  if (tagsMatch) {
+    result.tags = tagsMatch[1]
+      .split(',')
+      .map(tag => tag.trim().replace(/['"]/g, ''));
+  }
+  
+  return result;
+}
+
 onMounted(async () => {
-  // In a real implementation, this would fetch and parse actual Markdown files
-  // For this demonstration, we'll use mock data
-  setTimeout(() => {
-    projects.value = [
-      {
-        title: 'CI/CD Pipeline',
-        slug: 'ci-cd-pipeline',
-        description: 'Build a complete CI/CD pipeline using GitHub Actions for a Node.js application.',
-        tags: ['ci-cd', 'github-actions', 'intermediate']
-      },
-      {
-        title: 'Infrastructure as Code',
-        slug: 'infrastructure-as-code',
-        description: 'Deploy cloud infrastructure using Terraform and AWS free tier resources.',
-        tags: ['terraform', 'aws', 'iac', 'intermediate']
-      },
-      {
-        title: 'Monitoring Stack',
-        slug: 'monitoring-stack',
-        description: 'Set up a complete monitoring solution with Prometheus and Grafana.',
-        tags: ['monitoring', 'prometheus', 'grafana', 'intermediate']
+  try {
+    const projectsData = [];
+    
+    // Process each project file
+    for (const path in projectFiles) {
+      try {
+        // Get the raw markdown content
+        const content = await projectFiles[path]();
+        
+        // Extract the slug from the file path
+        const fileName = path.split('/').pop();
+        const slug = fileName.replace('.md', '');
+        
+        // Parse the frontmatter
+        const projectData = parseFrontmatter(content);
+        
+        // Add the slug to the project data
+        projectsData.push({
+          ...projectData,
+          slug
+        });
+      } catch (err) {
+        console.error(`Error loading project from ${path}:`, err);
       }
-    ];
+    }
+    
+    // Set the projects data
+    projects.value = projectsData;
+    
+  } catch (err) {
+    console.error('Error loading projects:', err);
+    error.value = 'Failed to load projects. Please try again later.';
+  } finally {
     loading.value = false;
-  }, 500);
+  }
 });
 </script>

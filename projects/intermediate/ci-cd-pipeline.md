@@ -15,10 +15,10 @@ In this project, you will build a continuous integration and continuous deployme
 - Basic knowledge of JavaScript/Node.js
 - Experience with Docker (from the beginner projects)
 
+
 ## Steps
 
 ### 1. Create a Simple Node.js Application
-
 First, let's create a simple Express application with Jest for testing:
 
 ```bash
@@ -80,6 +80,7 @@ Update the `package.json` scripts:
   "test:ci": "jest --ci --coverage"
 }
 ```
+
 
 ### 2. Set Up GitHub Repository
 
