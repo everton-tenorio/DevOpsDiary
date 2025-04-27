@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 // Workaround para __dirname em ESM
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -16,8 +17,6 @@ export default defineConfig(({ mode }) => {
         // Plugin personalizado para copiar arquivos .md
         name: 'copy-md-files',
         generateBundle() {
-          const fs = require('fs');
-          const path = require('path');
           const srcDir = path.resolve(__dirname, 'projects');
           const destDir = path.resolve(__dirname, 'dist/projects');
 

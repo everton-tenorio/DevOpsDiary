@@ -36,9 +36,9 @@
       </div>
       
       <!-- Project Content -->
-      <div class="bg-gray-800 text-[#E6EDF3] lg:ml-[1px] lg:mr-[1px] ml-[-20px] mr-[-20px] p-6 rounded-lg mb-8">
+      <div class="bg-gray-900 text-[#E6EDF3] lg:ml-[1px] lg:mr-[1px] ml-[-20px] mr-[-20px] p-6 rounded-lg mb-8">
         <div v-if="project.overview" class="mb-6">
-          <h2 class="text-xl font-mono font-bold text-terminal-green mb-4">Overview</h2>
+          <h2 class="text-xl font-mono font-bold text-terminal-green mb-4">Requirements</h2>
           <div v-html="project.overview"></div>
         </div>
         
@@ -50,25 +50,30 @@
         </div>
         
         <div v-if="project.steps && project.steps.length" class="mb-6">
-        <h2 class="text-xl font-mono font-bold text-terminal-green mb-4">Steps</h2>
-        <div>
-          <div 
-            v-for="(step, index) in project.steps" 
-            :key="index"
-            class="mb-6"
-          >
-            <h3 class="text-lg font-mono text-terminal-green mb-2">
-              Step {{ index + 1 }}: {{ step.title }}
-            </h3>
-            <div v-for="(block, blockIndex) in step.blocks" :key="blockIndex">
-              <div v-if="block.type === 'text'" v-html="block.content" class="mb-3"></div>
-              <div v-if="block.type === 'code'" class="bg-[#1a1a1a] rounded pt-4 pb-4 mb-3 font-mono text-white overflow-x-auto">
-                <pre><code class="hljs" :class="block.lang ? `language-${block.lang}` : ''" v-html="block.content"></code></pre>
+          <h2 class="text-xl font-mono font-bold text-terminal-green mb-4">Steps</h2>
+          <div>
+            <div 
+              v-for="(step, index) in project.steps" 
+              :key="index"
+              class="mb-6"
+            >
+              <h3 class="text-lg font-mono text-terminal-green mb-2">
+                Step {{ index + 1 }}: {{ step.title }}
+              </h3>
+              <div v-for="(block, blockIndex) in step.blocks" :key="blockIndex">
+                <div v-if="block.type === 'text'" v-html="block.content" class="mb-3"></div>
+                <div v-if="block.type === 'code'" class="bg-[#1a1a1a] rounded pt-4 pb-4 mb-3 font-mono text-white overflow-x-auto">
+                  <pre><code class="hljs" :class="block.lang ? `language-${block.lang}` : ''" v-html="block.content"></code></pre>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+        
+        <div v-if="project.stretchGoal" class="mb-6">
+          <h2 class="text-xl font-mono font-bold text-terminal-green mb-4">Stretch Goal</h2>
+          <div v-html="project.stretchGoal"></div>
+        </div>
         
         <div v-if="project.resources && project.resources.length" class="mb-6">
           <h2 class="text-xl font-mono font-bold text-terminal-green mb-4">Resources</h2>
@@ -135,17 +140,11 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { parseMarkdown } from '../utils/markdownParser';
-import markdownIt from 'markdown-it';
-
-// Initialize markdown-it for template usage (e.g., code blocks)
-const md = markdownIt({
-  html: true,
-  linkify: true,
-});
 
 const route = useRoute();
+const router = useRouter();
 const loading = ref(true);
 const error = ref(null);
 const project = ref(null);
@@ -156,37 +155,37 @@ const capitalizeFirstLetter = (string) => {
 
 onMounted(async () => {
   try {
+    // Forçar rolagem para o topo
+    window.scrollTo(0, 0);
+
+    // Remover qualquer hash da URL
+    if (window.location.hash) {
+      await router.replace({ ...route, hash: '' });
+    }
+
     const { level, slug } = route.params;
     
-    // Fetch the markdown file
-    try {
-      const response = await fetch(`/projects/${level}/${slug}.md`);
-      
-      if (!response.ok) {
-        throw new Error(`Project not found: ${response.status}`);
-      }
-      
-      const markdownContent = await response.text();
-      project.value = parseMarkdown(markdownContent);
-      
-    } catch (err) {
-      console.error('Error loading project:', err);
-      error.value = 'Project not found. Please check the URL and try again.';
+    // Fetch the markdown file using import.meta.glob
+    const projectFiles = import.meta.glob('/projects/*/*.md', { query: '?raw', import: 'default', eager: false });
+    const filePath = `/projects/${level}/${slug}.md`;
+
+    if (!projectFiles[filePath]) {
+      throw new Error(`Project not found at path: ${filePath}`);
     }
+
+    const markdownContent = await projectFiles[filePath]();
+    project.value = parseMarkdown(markdownContent);
     
-    loading.value = false;
   } catch (err) {
-    error.value = 'Error everyone loading project. Please try again later.';
+    console.error('Error loading project:', err);
+    error.value = `Failed to load project: ${err.message}`;
+  } finally {
     loading.value = false;
-    console.error(err);
   }
 });
 </script>
 
 <style scoped>
-span:not(.hljs *) {
-  color: #E6EDF3;
-}
 .terminal-tag {
   @apply inline-block bg-gray-800 text-terminal-green px-2 py-1 rounded mr-2 mb-2;
 }
@@ -199,16 +198,24 @@ span:not(.hljs *) {
 .hljs {
   background: transparent;
 }
-/* Add spacing for text blocks */
+:deep(h2) {
+  @apply text-2xl;
+}
+:deep(h3) {
+  @apply text-xl pt-4 text-terminal-green;
+}
 :deep(p) {
-  @apply mb-6 mt-6; /* Margin below paragraphs */
+  @apply mb-6 mt-6;
 }
 :deep(ul) {
-  @apply list-disc pl-6 mb-4; /* Restore bullets and add padding */
+  @apply list-disc pl-6 mb-4;
 }
-/* Ensure code blocks have consistent spacing */
 pre {
-  @apply mb-4; /* Margin below code blocks */
+  @apply mb-4;
+}
+
+/* Evitar foco automático em links e botões no carregamento */
+a:focus, button:focus {
+  outline: none;
 }
 </style>
-

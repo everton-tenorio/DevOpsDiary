@@ -1,7 +1,7 @@
-// src/utils/markdownParser.js
 import markdownIt from 'markdown-it';
 import frontMatter from 'front-matter';
 import hljs from 'highlight.js';
+import sanitizeHtml from 'sanitize-html';
 import yaml from 'highlight.js/lib/languages/yaml';
 import dockerfile from 'highlight.js/lib/languages/dockerfile';
 import json from 'highlight.js/lib/languages/json';
@@ -21,9 +21,8 @@ const md = markdownIt({
   highlight: (str, lang) => {
     if (lang && hljs.getLanguage(lang)) {
       try {
-        return `<pre><code class="hljs language-${lang}">${
-          hljs.highlight(str, { language: lang }).value
-        }</code></pre>`;
+        const highlighted = hljs.highlight(str, { language: lang }).value;
+        return `<pre><code class="hljs language-${lang}">${highlighted}</code></pre>`;
       } catch (err) {
         console.error(`Highlight.js failed for language "${lang}":`, err);
       }
@@ -31,29 +30,58 @@ const md = markdownIt({
     return `<pre><code class="hljs">${md.utils.escapeHtml(str)}</code></pre>`;
   },
 });
+
+// Configuração para sanitize-html
+const sanitizeOptions = {
+  allowedTags: sanitizeHtml.defaults.allowedTags.concat(['pre', 'code', 'span']),
+  allowedAttributes: {
+    ...sanitizeHtml.defaults.allowedAttributes,
+    code: ['class'],
+    pre: ['class'],
+    span: ['class'],
+  },
+  disallowedTagsMode: 'discard',
+};
+
 /**
  * Parse markdown content into structured project data
  * @param {string} markdown - Raw markdown content
  * @returns {Object} - Structured project data
  */
 export function parseMarkdown(markdown) {
-  // Parse frontmatter and body
-  const { attributes, body } = frontMatter(markdown);
+  let attributes, body;
+  try {
+    const parsed = frontMatter(markdown);
+    attributes = parsed.attributes;
+    body = parsed.body;
+  } catch (err) {
+    console.error('Error parsing frontmatter:', err);
+    return {
+      title: 'Error',
+      description: 'Failed to parse project content.',
+      tags: [],
+      overview: '',
+      prerequisites: [],
+      steps: [],
+      resources: [],
+      stretchGoal: '',
+      communitySolutions: [],
+    };
+  }
 
-  // Initialize project data from frontmatter
   const projectData = {
-    title: attributes.title || '',
-    description: attributes.description || '',
+    title: attributes.title || 'Untitled Project',
+    description: attributes.description || 'No description available.',
     tags: Array.isArray(attributes.tags) ? attributes.tags : [],
     overview: '',
     prerequisites: [],
     steps: [],
     resources: [],
-    communitySolutions: [], // Default empty array
+    stretchGoal: '',
+    communitySolutions: [],
   };
 
-  // Split body into sections based on ## headers
-  const sections = body.split(/^## /m).filter(Boolean);
+  const sections = body.split(/^##\s+/m).filter(Boolean);
 
   sections.forEach((section) => {
     const lines = section.split('\n');
@@ -62,7 +90,8 @@ export function parseMarkdown(markdown) {
 
     switch (sectionTitle.toLowerCase()) {
       case 'overview':
-        projectData.overview = md.render(sectionContent);
+      case 'requirements': // Tratar Requirements como Overview
+        projectData.overview = sanitizeHtml(md.render(sectionContent), sanitizeOptions);
         break;
       case 'prerequisites':
         projectData.prerequisites = parseListItems(sectionContent);
@@ -72,6 +101,9 @@ export function parseMarkdown(markdown) {
         break;
       case 'resources':
         projectData.resources = parseResources(sectionContent);
+        break;
+      case 'stretch goal':
+        projectData.stretchGoal = sanitizeHtml(md.render(sectionContent), sanitizeOptions);
         break;
     }
   });
@@ -89,7 +121,7 @@ function parseListItems(content) {
     .split('\n')
     .filter((line) => line.trim().startsWith('- '))
     .map((line) => line.replace(/^-\s+/, '').trim());
-  return items.map((item) => md.renderInline(item));
+  return items.map((item) => sanitizeHtml(md.renderInline(item), sanitizeOptions));
 }
 
 /**
@@ -98,14 +130,13 @@ function parseListItems(content) {
  * @returns {Array} - Array of step objects
  */
 function parseSteps(content) {
-  const stepSections = content.split(/^### /m).filter(Boolean);
+  const stepSections = content.split(/^###\s+/m).filter(Boolean);
 
   return stepSections.map((stepSection) => {
     const lines = stepSection.split('\n');
     const title = lines[0].trim();
     const content = lines.slice(1).join('\n').trim();
 
-    // Split content into blocks (text or code)
     const blocks = [];
     let currentText = '';
     let inCodeBlock = false;
@@ -113,9 +144,9 @@ function parseSteps(content) {
     let codeContent = '';
 
     content.split('\n').forEach((line) => {
-      if (line.match(/^```(\w+)?/)) {
+      const codeBlockStart = line.match(/^```(\w+)?/);
+      if (codeBlockStart) {
         if (inCodeBlock) {
-          // End of code block
           inCodeBlock = false;
           let highlightedCode;
           try {
@@ -130,9 +161,8 @@ function parseSteps(content) {
           codeContent = '';
           codeLang = null;
         } else {
-          // Start of code block
           inCodeBlock = true;
-          codeLang = line.match(/^```(\w+)/)?.[1] || null;
+          codeLang = codeBlockStart[1] || null;
         }
       } else if (inCodeBlock) {
         codeContent += line + '\n';
@@ -140,22 +170,29 @@ function parseSteps(content) {
         if (line.trim()) {
           currentText += line + '\n';
         } else if (currentText.trim()) {
-          // End of text block
-          blocks.push({ type: 'text', content: md.render(currentText.trim()) });
+          blocks.push({ type: 'text', content: sanitizeHtml(md.render(currentText.trim()), sanitizeOptions) });
           currentText = '';
         }
       }
     });
 
-    // Handle any remaining text
     if (currentText.trim()) {
-      blocks.push({ type: 'text', content: md.render(currentText.trim()) });
+      blocks.push({ type: 'text', content: sanitizeHtml(md.render(currentText.trim()), sanitizeOptions) });
+    }
+    if (inCodeBlock && codeContent.trim()) {
+      let highlightedCode;
+      try {
+        highlightedCode = codeLang && hljs.getLanguage(codeLang)
+          ? hljs.highlight(codeContent, { language: codeLang }).value
+          : md.utils.escapeHtml(codeContent);
+      } catch (err) {
+        console.error(`Highlight.js failed for language "${codeLang}":`, err);
+        highlightedCode = md.utils.escapeHtml(codeContent);
+      }
+      blocks.push({ type: 'code', lang: codeLang, content: highlightedCode });
     }
 
-    return {
-      title,
-      blocks, // Array of { type: 'text' | 'code', content: string, lang?: string }
-    };
+    return { title, blocks };
   });
 }
 
@@ -188,4 +225,3 @@ function parseResources(content) {
       };
     });
 }
-

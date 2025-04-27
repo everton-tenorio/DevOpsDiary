@@ -2,10 +2,10 @@
   <div class="bg-terminal-black border border-terminal-green/20 rounded-lg overflow-hidden h-full flex flex-col transition-all duration-300 transform hover:scale-102 hover:border-terminal-green/60 group">
     <!-- Header with difficulty indicator -->
     <div class="px-5 py-4 flex items-center justify-between border-b border-terminal-green/20">
-      <h3 class="text-lg font-mono font-bold text-terminal-white group-hover:text-terminal-green transition-colors duration-200">
+      <h3 class="text-base font-mono font-bold text-terminal-white group-hover:text-terminal-green transition-colors duration-200">
         {{ project.title }}
       </h3>
-      <div class="text-xs font-mono px-2 py-1 rounded-full" 
+      <div class="text-xs font-mono mt-2 px-2 py-1 rounded-full" 
            :class="{
              'bg-green-900/30 text-green-400': level === 'beginner',
              'bg-yellow-900/30 text-yellow-400': level === 'intermediate',
@@ -17,13 +17,13 @@
     
     <!-- Content -->
     <div class="p-5 flex-grow flex flex-col">
-      <p class="text-terminal-gray mb-4 flex-grow">{{ project.description }}</p>
+      <p class="text-terminal-gray mb-3 text-sm flex-grow">{{ project.description }}</p>
       
-      <div class="mb-5 flex flex-wrap">
+      <div class="mb-3 flex flex-wrap">
         <span 
           v-for="tag in project.tags" 
           :key="tag" 
-          class="bg-terminal-black-lighter text-xs font-mono py-1 px-2 rounded mr-2 mb-2 inline-block border border-terminal-green/10"
+          class="bg-terminal-black-lighter text-[10.5px] font-mono py-1 px-2 rounded mr-2 mb-2 inline-block border border-terminal-green/10"
         >
           # {{ tag }}
         </span>
@@ -33,7 +33,7 @@
         :to="`/${level}/${project.slug}`" 
         class="self-start font-mono text-terminal-green border border-terminal-green/50 rounded px-4 py-2 inline-flex items-center hover:bg-terminal-green hover:text-terminal-black transition-all duration-200"
       >
-        <span>View Project</span>
+        <span class="hover:text-terminal-black">View Project</span>
         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
         </svg>
