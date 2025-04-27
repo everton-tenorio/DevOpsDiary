@@ -29,7 +29,7 @@
         <p class="text-lg mb-4">{{ project.description }}</p>
         
         <div class="flex space-x-4">
-          <router-link :to="`/${$route.params.level}`" class="text-terminal-green hover:underline">
+          <router-link :to="`/${$route.params.level}`" class="text-terminal-green hover:underline" style="color: #51df85">
             ← Back to {{ capitalizeFirstLetter($route.params.level) }}
           </router-link>
         </div>
@@ -209,6 +209,9 @@ onMounted(async () => {
 }
 :deep(ul) {
   @apply list-disc pl-6 mb-4;
+}
+:deep(a) {
+  @apply text-[#95bafd];
 }
 pre {
   @apply mb-4;

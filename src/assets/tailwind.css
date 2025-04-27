@@ -17,4 +17,9 @@
   .terminal-tag {
     @apply bg-gray-800 text-xs font-mono py-1 px-2 rounded mr-2 mb-2 inline-block;
   }
+
+  code {
+    @apply text-[#fc6f6f];
+  }
+  
 }

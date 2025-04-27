@@ -3,8 +3,8 @@
     <!-- Background Grid Pattern -->
     <div class="absolute inset-0 bg-grid-pattern bg-grid opacity-10 pointer-events-none"></div>
     
-    <!-- Scanline Effect -->
-    <div class="scanline pointer-events-none"></div>
+    <!-- Scanline Effect 
+    <div class="scanline pointer-events-none"></div>-->
     
     <Header />
     <main class="flex-grow container mx-auto px-4 py-8 relative z-10">
@@ -34,7 +34,7 @@ h1, h2, h3, h4, h5, h6, code, pre {
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Scanline effect */
+/* Scanline effect
 .scanline {
   position: absolute;
   top: 0;
@@ -47,6 +47,7 @@ h1, h2, h3, h4, h5, h6, code, pre {
   pointer-events: none;
   opacity: 0.5;
 }
+*/
 
 /* Terminal glow for highlighted elements */
 .terminal-glow {
