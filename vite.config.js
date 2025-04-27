@@ -1,23 +1,62 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import path from 'path'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Workaround para __dirname em ESM
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(({ mode }) => {
-  // vamos usar um modo "preview" para o build de develop
-  const isPreview = mode === 'preview'
+  const isPreview = mode === 'preview';
 
   return {
-    plugins: [vue()],
+    plugins: [
+      vue(),
+      {
+        // Plugin personalizado para copiar arquivos .md
+        name: 'copy-md-files',
+        generateBundle() {
+          const fs = require('fs');
+          const path = require('path');
+          const srcDir = path.resolve(__dirname, 'projects');
+          const destDir = path.resolve(__dirname, 'dist/projects');
+
+          // Função para copiar diretórios recursivamente
+          const copyDir = (src, dest) => {
+            if (!fs.existsSync(dest)) {
+              fs.mkdirSync(dest, { recursive: true });
+            }
+            const entries = fs.readdirSync(src, { withFileTypes: true });
+            for (const entry of entries) {
+              const srcPath = path.join(src, entry.name);
+              const destPath = path.join(dest, entry.name);
+              if (entry.isDirectory()) {
+                copyDir(srcPath, destPath);
+              } else if (entry.name.endsWith('.md')) {
+                fs.copyFileSync(srcPath, destPath);
+              }
+            }
+          };
+
+          copyDir(srcDir, destDir);
+        },
+      },
+    ],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
       },
     },
     assetsInclude: ['**/*.md'],
-    // base diferente para main x develop
-    base: isPreview
-      ? '/DevOpsDiary/develop/'   // preview
-      : '/DevOpsDiary/',          // produção
-  }
-})
-
+    publicDir: 'public',
+    build: {
+      outDir: 'dist',
+      rollupOptions: {
+        input: {
+          main: path.resolve(__dirname, 'index.html'),
+        },
+      },
+    },
+    base: isPreview ? '/DevOpsDiary/develop/' : '/DevOpsDiary/',
+  };
+});
