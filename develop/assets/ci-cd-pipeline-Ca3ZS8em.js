@@ -43,7 +43,7 @@ app.get('/health', (req, res) => {
   res.status(200).send({ status: 'UP' });
 });
 
-const server = app.listen(({}).PORT || 3000, () => {
+const server = app.listen(process.env.PORT || 3000, () => {
   console.log(\`Server running on port \${server.address().port}\`);
 });
 
