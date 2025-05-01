@@ -4,11 +4,6 @@
 Welcome to DevOpsDiary, an open-source platform designed to help you master DevOps through hands-on projects. From beginners exploring Git to advanced practitioners tackling Kubernetes, GitOPs, etc. DevOpsDiary offers tasks organized into Beginner, Intermediate, and Advanced levels. Join our community, complete projects, share your solutions, and grow your DevOps skills!
 
 
-![GitHub Stars](https://img.shields.io/github/stars/everton-tenorio/DevOpsDiary)
-![MIT License](https://img.shields.io/github/license/everton-tenorio/DevOpsDiary) (LICENSE)
-
-
-
 ---
 
 
