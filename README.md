@@ -5,14 +5,14 @@ Welcome to DevOpsDiary, an open-source platform designed to help you master DevO
 
 
 ![GitHub Stars](https://img.shields.io/github/stars/everton-tenorio/DevOpsDiary)
-![MIT License](https://img.shields.io/github/license/everton-tenorio/DevOpsDiary)
+![MIT License](https://img.shields.io/github/license/everton-tenorio/DevOpsDiary) (LICENSE)
 
 
 
 ---
 
 
-DevOpsDiary is an open-source initiative focused on making DevOps learning practical and engaging. Our goal is to provide real-world projects that bridge the gap between theory and practice, catering to learners at all stages—whether you're just starting out or refining advanced skills. With a community-driven approach, we encourage collaboration, solution-sharing, and continuous improvement.
+DevOpsDiary is an open-source initiative focused on making DevOps learning practical and engaging. Our goal is to provide real-world projects that bridge the gap between theory and practice, catering to learners at all stages, whether you're just starting out or refining advanced skills. With a community-driven approach, we encourage collaboration, solution-sharing, and continuous improvement.
 
 
 ## How to Get Started
@@ -127,4 +127,4 @@ We’re calling on experienced DevOps experts to help validate our projects and 
 
 Code: MIT License (LICENSE).
 
-Thanks for joining #DevOpsDiary—let’s learn DevOps together! 🚀
+Thanks for joining #DevOpsDiar, let’s learn DevOps together! 🚀
