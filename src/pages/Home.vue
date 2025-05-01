@@ -44,7 +44,7 @@
         </div>
 
         <p class="text-xl font-mono font-bold text-[white] mt-8">
-          Check out the <a class="text-[#8aacec]" href="https://github.com/everton-tenorio/DevOpsDiary/tree/develop?tab=readme-ov-file#how-to-get-started">README.md</a> for all the instructions!
+          Check out the <a class="text-[#8aacec]" href="https://github.com/everton-tenorio/DevOpsDiary?tab=readme-ov-file#how-to-get-started">README.md</a> for all the instructions!
         </p>
       </div>
       
