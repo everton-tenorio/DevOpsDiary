@@ -44,9 +44,9 @@
             <span 
               class="terminal-tag"
               :class="{
-                'bg-green-900': submission.level === 'beginner',
-                'bg-blue-900': submission.level === 'intermediate',
-                'bg-red-900': submission.level === 'advanced'
+                'bg-[#fcff54]': submission.level === 'beginner',
+                'bg-[#0C7787]': submission.level === 'intermediate',
+                'bg-[#4ade80]': submission.level === 'advanced'
               }"
             >
               {{ submission.level }}

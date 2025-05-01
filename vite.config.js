@@ -9,6 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(({ mode }) => {
   const isPreview = mode === 'preview';
+  const isProd = mode === 'production';
 
   return {
     plugins: [
@@ -56,6 +57,6 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
-    base: isPreview ? '/DevOpsDiary/develop/' : '/DevOpsDiary/',
+    base: isPreview ? '/DevOpsDiary/develop/' : isProd ? '/DevOpsDiary/':  '/',
   };
 });
