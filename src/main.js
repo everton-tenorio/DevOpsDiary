@@ -10,7 +10,7 @@ import Beginner from './pages/Beginner.vue';
 import Intermediate from './pages/Intermediate.vue';
 import Advanced from './pages/Advanced.vue';
 import ProjectDetail from './pages/ProjectDetail.vue';
-import Community from './pages/Community.vue';
+//import Community from './pages/Community.vue';
 import About from './pages/About.vue';
 
 // Create router
@@ -22,7 +22,7 @@ const router = createRouter({
     { path: '/intermediate', component: Intermediate },
     { path: '/advanced', component: Advanced },
     { path: '/:level/:slug', component: ProjectDetail },
-    { path: '/community', component: Community },
+    //{ path: '/community', component: Community },
     { path: '/about', component: About }
   ]
 });

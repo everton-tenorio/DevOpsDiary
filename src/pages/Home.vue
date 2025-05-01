@@ -44,7 +44,7 @@
         </div>
       </div>
       
-      <!-- Community Section -->
+      <!-- Community Section -
       <div class="mb-12">
         <h2 class="text-2xl font-mono font-bold text-terminal-green mb-4">Join the Community</h2>
         <p class="mb-6">
@@ -53,7 +53,7 @@
         <router-link to="/community" class="terminal-button">
           View Community Projects
         </router-link>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
