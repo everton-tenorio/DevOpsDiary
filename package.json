@@ -1,0 +1,36 @@
+{
+  "name": "devops-diary",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:preview": "vite build --mode preview",
+    "preview": "vite preview",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "validate": "node scripts/validate-projects.js"
+  },
+  "dependencies": {
+    "front-matter": "^4.0.2",
+    "highlight.js": "^11.11.1",
+    "markdown-it": "^14.1.0",
+    "marked": "^7.0.5",
+    "prismjs": "^1.29.0",
+    "sanitize-html": "^2.16.0",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.4"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@vitejs/plugin-vue": "^5.1.4",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^8.48.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "frontmatter-markdown-loader": "^3.7.0",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
+    "vite": "^6.3.3"
+  }
+}
