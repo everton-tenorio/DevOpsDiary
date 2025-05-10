@@ -57,6 +57,6 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
-    base: isPreview ? '/DevOpsDiary/develop/' : isProd ? './DevOpsDiary/':  './',
+    base: isPreview ? './DevOpsDiary/develop/' : isProd ? './DevOpsDiary/':  './',
   };
 });

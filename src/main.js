@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import App from './App.vue';
 import './assets/tailwind.css';
 import 'highlight.js/styles/github-dark.css';
@@ -15,7 +15,7 @@ import About from './pages/About.vue';
 
 // Create router
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     { path: '/', component: Home },
     { path: '/beginner', component: Beginner },
