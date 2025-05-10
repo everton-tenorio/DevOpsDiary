@@ -1,0 +1,54 @@
+name: "Project Submission"
+description: "Share your DevOpsDiary project solution"
+title: "[SUBMIT] ${{project_title}}"
+labels: ["project submission"]
+body:
+  - type: input
+    id: project_title
+    attributes:
+      label: "Project Title"
+      description: 'e.g. "Git Basics"'
+      placeholder: "Enter the project title"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: level
+    attributes:
+      label: "Level"
+      description: "Select your difficulty level"
+      options:
+        - Beginner
+        - Intermediate
+        - Advanced
+    validations:
+      required: true
+
+  - type: input
+    id: devopsdiary_link
+    attributes:
+      label: "DevOpsDiary Project Page Link"
+      description: "e.g. https://devopsdiary.site/beginner/01_git_basics"
+      placeholder: "https://devopsdiary.site/..."
+    validations:
+      required: true
+
+  - type: input
+    id: repository_link
+    attributes:
+      label: "Repository Link"
+      description: "Link to your solution repo or folder"
+      placeholder: "https://github.com/your-username/..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description of Your Approach"
+      description: "Summarize what you did and how"
+      placeholder: |
+        - Initialized a repo with `git init`.
+        - Created and merged branches using `git branch` and `git merge`.
+    validations:
+      required: true
