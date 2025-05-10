@@ -77,3 +77,4 @@ jobs:
           publish_dir: ./dist
           publish_branch: gh-pages-preview
           cname: devopsdiary.site
+          destination_dir: develop
