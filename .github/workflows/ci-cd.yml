@@ -67,6 +67,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
+          cname: devopsdiary.site
 
       - name: Deploy Preview to GitHub Pages (develop)
         if: github.ref == 'refs/heads/develop'
@@ -75,4 +76,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages-preview
+          cname: devopsdiary.site
           destination_dir: develop
