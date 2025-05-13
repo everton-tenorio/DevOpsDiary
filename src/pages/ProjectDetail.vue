@@ -101,7 +101,7 @@
         </ol>
         <div class="flex space-x-4">
           <a 
-            href="https://github.com/everton-tenorio/DevOpsDiary/issues/new" 
+            :href="issueUrl"            
             target="_blank"
             class="terminal-button"
           >
@@ -139,9 +139,16 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { parseMarkdown } from '../utils/markdownParser';
+
+const props = defineProps({
+  projectTitle: {
+    type: String,
+    default: ''
+  }
+});
 
 const route = useRoute();
 const router = useRouter();
@@ -152,6 +159,20 @@ const project = ref(null);
 const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
+
+
+const issueUrl = computed(() => {
+  let level_p = route.params.level
+  const base = 'https://github.com/everton-tenorio/DevOpsDiary/issues/new'
+  const template = 'project_submission.yml'
+  const project_title = encodeURIComponent(props.projectTitle || project.value?.title || '');
+  const level = encodeURIComponent(`${capitalizeFirstLetter(level_p)}`|| '')
+  const devopsLink = encodeURIComponent(`https://devopsdiary.site/#/${route.params.level}/${route.params.slug}`)
+  const repoLink = encodeURIComponent('')
+  const labels = encodeURIComponent(`${level_p}` || '')
+
+  return `${base}?template=${template}&title=&project_title=${project_title}&labels=${labels}&level=${level}&devopsdiary_link=${devopsLink}&repository_link=${repoLink}&description=`
+})
 
 onMounted(async () => {
   try {

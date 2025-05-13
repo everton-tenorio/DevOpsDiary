@@ -16,7 +16,7 @@ body:
     id: level
     attributes:
       label: "Level"
-      description: "Select your difficulty level"
+      description: "Difficulty level"
       placeholder: "Beginner, Intermediate or Advanced"
     validations:
       required: true
