@@ -7,7 +7,7 @@
         <span class="text-terminal-green mr-2">></span> Our Story
       </h2>
       <p class="mb-4">
-        Hi, @evertonx93 here. DevOpsDiary started as a hashtag on X, where I began sharing my DevOps studies and personal projects. It has evolved into a community-driven platform that provides hands-on projects to help developers learn and practice DevOps skills.
+        Hi, Everton Tenorio here. DevOpsDiary started as a hashtag on X, where I began sharing my DevOps studies and personal projects. It has evolved into a community-driven platform that provides hands-on projects to help developers learn and practice DevOps skills.
       </p>
       <p class="mb-4">
         The mission is simple: to provide practical DevOps learning opportunities that are accessible to everyone. No paywalls, no subscriptions, just open-source knowledge sharing.
