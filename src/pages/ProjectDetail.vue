@@ -36,7 +36,7 @@
       </div>
       
       <!-- Project Content -->
-      <div class="bg-gray-900 text-[#E6EDF3] lg:ml-[1px] lg:mr-[1px] ml-[-20px] mr-[-20px] p-6 rounded-lg mb-8">
+      <div class="bg-[#1c2128] text-[#E6EDF3] lg:ml-[1px] lg:mr-[1px] ml-[-20px] mr-[-20px] p-6 rounded-lg mb-8">
         <div v-if="project.overview" class="mb-6">
           <h2 class="text-xl font-mono font-bold text-terminal-green mb-4">Requirements</h2>
           <div v-html="project.overview"></div>
@@ -89,7 +89,7 @@
       </div>
       
       <!-- Submission -->
-      <div class="bg-gray-900 text-[#E6EDF3] p-6 rounded-lg mb-8">
+      <div class="bg-[#1c2128] text-[#E6EDF3] p-6 rounded-lg mb-8">
         <h2 class="text-xl font-mono font-bold text-terminal-green mb-4">Submit Your Solution</h2>
         <p class="mb-4">
           Completed this project? Share your solution with the community!
