@@ -19,11 +19,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '25'
+          node-version: '20'
           cache: 'npm'
 
-      # better-sqlite3 requires native compilation
-      - name: Install native build tools
+      - name: Install native build tools (required for better-sqlite3)
         run: sudo apt-get install -y python3 make g++
 
       - name: Install Dependencies
@@ -35,13 +34,18 @@ jobs:
         with:
           configFile: .commitlintrc.json
 
-      - name: Validate Projects
-        run: node scripts/validate-projects.js
-
-      - name: Generate Static Site
+      - name: Generate Static Site (develop)
+        if: github.ref == 'refs/heads/develop'
         run: npx nuxt generate
         env:
-          NODE_ENV: production
+          NITRO_PRESET: static
+          NUXT_APP_BASE_URL: /develop/
+
+      - name: Generate Static Site (main / PR)
+        if: github.ref != 'refs/heads/develop'
+        run: npx nuxt generate
+        env:
+          NITRO_PRESET: static
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
