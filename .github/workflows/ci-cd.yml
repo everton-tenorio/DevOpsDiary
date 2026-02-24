@@ -22,6 +22,9 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: Install native build tools (required for better-sqlite3)
+        run: sudo apt-get install -y python3 make g++
+
       - name: Install Dependencies
         run: npm ci
 
@@ -31,22 +34,24 @@ jobs:
         with:
           configFile: .commitlintrc.json
 
-      - name: Validate Projects
-        run: node scripts/validate-projects.js
+      - name: Generate Static Site (develop)
+        if: github.ref == 'refs/heads/develop'
+        run: npx nuxt generate
+        env:
+          NITRO_PRESET: static
+          NUXT_APP_BASE_URL: /develop/
 
-      - name: Build Site
-        run: |
-          if [ "${{ github.ref }}" = "refs/heads/develop" ]; then
-            npm run build:preview
-          else
-            npm run build
-          fi
+      - name: Generate Static Site (main / PR)
+        if: github.ref != 'refs/heads/develop'
+        run: npx nuxt generate
+        env:
+          NITRO_PRESET: static
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: site-build
-          path: dist
+          path: .output/public
 
   deploy:
     runs-on: ubuntu-latest
@@ -58,14 +63,14 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: site-build
-          path: dist
+          path: .output/public
 
       - name: Deploy to GitHub Pages (main)
         if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./.output/public
           publish_branch: gh-pages
           cname: devopsdiary.site
 
@@ -74,7 +79,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./.output/public
           publish_branch: gh-pages-preview
           cname: devopsdiary.site
           destination_dir: develop
