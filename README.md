@@ -1,6 +1,10 @@
+<center>
+  <img src="/public/devopsdiary1.png" width="50px">
+</center>
+
 # #DevOpsDiary
 
-**A hands-on path to becoming a senior DevOps engineer.**
+**Hands-on DevOps projects to level up your skills.**
 
 No paywalls. No subscriptions. No bureaucracy. Just structured, practical tasks that build real skills.
 

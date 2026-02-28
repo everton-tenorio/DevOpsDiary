@@ -42,7 +42,7 @@ const levels: Level[] = [
     description: 'Platform engineering, FinOps, multi-cloud architecture, and senior-level practices.',
     color: 'text-red-400',
     border: 'border-red-400/40 hover:border-red-400',
-    tasks: null,
+    tasks: 11,
   },
 ]
 </script>

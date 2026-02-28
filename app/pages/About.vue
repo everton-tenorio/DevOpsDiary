@@ -2,7 +2,7 @@
 useHead({
   title: 'About | DevOpsDiary',
   meta: [
-    { name: 'description', content: 'About DevOpsDiary — open-source hands-on DevOps projects for all skill levels.' },
+    { name: 'description', content: 'About DevOpsDiary - open-source hands-on DevOps projects for all skill levels.' },
   ],
 })
 

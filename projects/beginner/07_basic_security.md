@@ -75,4 +75,4 @@ You are required to write a Bash script `security-check.sh` that performs a comp
 
 ---
 
-Once you complete this task you will be familiar with basic Linux security auditing — essential knowledge for maintaining secure infrastructure and a direct prerequisite for the cloud and infrastructure tasks ahead.
+Once you complete this task you will be familiar with basic Linux security auditing - essential knowledge for maintaining secure infrastructure and a direct prerequisite for the cloud and infrastructure tasks ahead.

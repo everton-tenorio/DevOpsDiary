@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// Global app setup — components auto-imported by Nuxt
+// Global app setup - components auto-imported by Nuxt
 </script>
 
 <template>
