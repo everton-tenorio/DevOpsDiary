@@ -7,9 +7,9 @@ const { data: posts, status } = await useAsyncData(
 const isLoading = computed(() => status.value === 'pending')
 
 useHead({
-  title: 'Everton Tenorio | Blog',
+  title: 'DevOpsDiary | Blog',
   meta: [
-    { name: 'description', content: 'Todos os posts do blog sobre DevOps e tecnologia.' },
+    { name: 'description', content: 'all posts' },
   ],
 })
 </script>

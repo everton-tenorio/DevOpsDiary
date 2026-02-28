@@ -50,7 +50,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="['min-h-screen transition-colors duration-200', isDarkMode ? 'bg-[#1f2123]' : 'bg-gray-50']">
+  <div :class="['min-h-screen transition-colors duration-200 ml-[-4%] mr-[-4%]', isDarkMode ? 'bg-[#1f2123]' : 'bg-gray-50']">
     <!-- Post não encontrado -->
     <div v-if="!post" class="max-w-4xl mx-auto px-4 py-16 text-center">
       <div class="text-6xl mb-6">🔍</div>
@@ -149,7 +149,7 @@ onMounted(() => {
               ← Posts
             </NuxtLink>
             <div :class="['text-sm font-mono', isDarkMode ? 'text-gray-400' : 'text-gray-500']">
-              Publicado em {{ formattedDate }}
+              {{ formattedDate }}
             </div>
           </div>
         </footer>
