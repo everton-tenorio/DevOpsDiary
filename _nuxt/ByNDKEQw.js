@@ -1,1 +1,0 @@
-import{_ as s,o,c as r,H as t}from"./BMxorS3u.js";const n={};function c(e,a){return o(),r("th",null,[t(e.$slots,"default")])}const l=Object.assign(s(n,[["render",c]]),{__name:"ProseTh"});export{l as default};
