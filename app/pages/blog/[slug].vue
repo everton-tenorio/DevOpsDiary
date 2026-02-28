@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { format } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
+import { enUS } from 'date-fns/locale'
 
 const route = useRoute()
 
@@ -14,7 +14,7 @@ const isDarkMode = ref<boolean>(false)
 const formattedDate = computed<string>(() => {
   if (!post.value?.date) return ''
   try {
-    return format(new Date(post.value.date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })
+    return format(new Date(post.value.date), 'MMMM dd, yyyy', { locale: enUS })
   } catch {
     return post.value.date
   }
@@ -27,20 +27,31 @@ const toggleDarkMode = (): void => {
   }
 }
 
+const siteUrl = 'https://devopsdiary.site'
+
 useHead(() => ({
-  title: post.value ? `${post.value.title} | DevOpsDiary` : 'Post não encontrado | DevOpsDiary',
+  title: post.value ? `${post.value.title} | DevOpsDiary` : 'Post not found | DevOpsDiary',
   meta: post.value
     ? [
         { name: 'description', content: post.value.description ?? '' },
+
+        { property: 'og:type', content: 'article' },
+        { property: 'og:site_name', content: 'DevOpsDiary' },
+        { property: 'og:url', content: `${siteUrl}${route.path}` },
         { property: 'og:title', content: post.value.title },
         { property: 'og:description', content: post.value.description ?? '' },
-        { property: 'og:type', content: 'article' },
-        { property: 'og:image', content: post.value.bannerImage ?? '/og-default.png' },
-        { property: 'twitter:card', content: 'summary_large_image' },
-        { property: 'twitter:title', content: post.value.title },
-        { property: 'twitter:description', content: post.value.description ?? '' },
+        { property: 'og:image', content: post.value.bannerImage ? `${siteUrl}${post.value.bannerImage}` : `${siteUrl}/og-default.png` },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        { property: 'og:image:type', content: 'image/png' },
+
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:site', content: '@devopsdiary' },
+        { name: 'twitter:title', content: post.value.title },
+        { name: 'twitter:description', content: post.value.description ?? '' },
+        { name: 'twitter:image', content: post.value.bannerImage ? `${siteUrl}${post.value.bannerImage}` : `${siteUrl}/og-default.png` },
       ]
-    : [{ name: 'description', content: 'Post não encontrado' }],
+    : [{ name: 'description', content: 'Post not found' }],
 }))
 
 onMounted(() => {
@@ -51,24 +62,24 @@ onMounted(() => {
 
 <template>
   <div :class="['min-h-screen transition-colors duration-200 ml-[-4%] mr-[-4%]', isDarkMode ? 'bg-[#1f2123]' : 'bg-gray-50']">
-    <!-- Post não encontrado -->
+    <!-- Post not found -->
     <div v-if="!post" class="max-w-4xl mx-auto px-4 py-16 text-center">
       <div class="text-6xl mb-6">🔍</div>
       <h1 :class="['text-3xl font-bold mb-4 font-mono', isDarkMode ? 'text-white' : 'text-gray-900']">
-        Post não encontrado
+        Post not found
       </h1>
       <p :class="isDarkMode ? 'text-gray-300 mb-8' : 'text-gray-600 mb-8'">
-        O post que você procura não existe ou foi removido.
+        This post does not exist or has been removed.
       </p>
       <NuxtLink
         to="/blog"
         class="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-500 transition-colors font-mono"
       >
-        ← Ver todos os posts
+        ← All posts
       </NuxtLink>
     </div>
 
-    <!-- Post encontrado -->
+    <!-- Post found -->
     <article v-else>
       <!-- Banner -->
       <div v-if="post.bannerImage" class="w-full h-64 md:h-96 overflow-hidden">
@@ -83,7 +94,7 @@ onMounted(() => {
               to="/blog"
               class="inline-flex items-center px-6 py-3 bg-[#0A0E14] text-white rounded-lg hover:bg-green-400 hover:text-black transition-colors font-mono"
             >
-              ← Voltar
+              ← Back
             </NuxtLink>
 
             <!-- Dark mode toggle -->
@@ -92,7 +103,7 @@ onMounted(() => {
                 'p-2 rounded-lg transition-all duration-200 flex items-center gap-2',
                 isDarkMode ? 'bg-gray-700 text-yellow-400 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300',
               ]"
-              :title="isDarkMode ? 'Ativar modo claro' : 'Ativar modo escuro'"
+              :title="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
               @click="toggleDarkMode"
             >
               <svg v-if="!isDarkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -134,12 +145,12 @@ onMounted(() => {
           </div>
         </header>
 
-        <!-- Conteúdo renderizado pelo @nuxt/content -->
+        <!-- Content rendered by @nuxt/content -->
         <div :class="['prose prose-lg max-w-none', isDarkMode ? 'prose-dark' : 'prose-light']">
           <ContentRenderer :value="post" />
         </div>
 
-        <!-- Footer do artigo -->
+        <!-- Article footer -->
         <footer :class="['mt-16 pt-8 border-t', isDarkMode ? 'border-gray-700' : 'border-gray-200']">
           <div class="flex justify-between items-center">
             <NuxtLink
@@ -159,7 +170,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* Modo Claro */
+/* Light mode */
 .prose-light { @apply text-gray-800; }
 .prose-light :deep(h1), .prose-light :deep(h2), .prose-light :deep(h3),
 .prose-light :deep(h4), .prose-light :deep(h5), .prose-light :deep(h6) {
@@ -184,7 +195,7 @@ onMounted(() => {
 .prose-light :deep(th), .prose-light :deep(td) { @apply border border-gray-300 px-4 py-2; }
 .prose-light :deep(th) { @apply bg-gray-100 font-semibold text-gray-900; }
 
-/* Modo Escuro */
+/* Dark mode */
 .prose-dark { @apply text-gray-200; }
 .prose-dark :deep(h1), .prose-dark :deep(h2), .prose-dark :deep(h3),
 .prose-dark :deep(h4), .prose-dark :deep(h5), .prose-dark :deep(h6) {
