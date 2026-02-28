@@ -5,8 +5,9 @@ tags: [beginner, automation, bash, deployment, nginx]
 ---
 
 ## Learning Objectives
+
 - Understand basic deployment automation concepts
-- Learn to create reliable shell scripts
+- Learn to create reliable and idempotent shell scripts
 - Develop skills in service management
 - Implement basic deployment verification
 - Create maintainable automation scripts
@@ -16,53 +17,52 @@ tags: [beginner, automation, bash, deployment, nginx]
 You are required to write a Bash script `deploy-site.sh` that automates the deployment of a static website:
 
 1. **Script Structure**
-   - Create a well-organized script with comments
-   - Include basic error handling
-   - Add usage instructions (displayed with `-h` or `--help`)
-   - Accept parameters for source directory
+   - Well-organized script with clear comments
+   - Usage instructions displayed with `-h` or `--help`
+   - Accept a parameter for the source directory
+   - Basic error handling throughout
 
 2. **Environment Setup**
-   - Check if Nginx is installed, and install if missing
-   - Verify Nginx is installed correctly
-   - Check if the web root directory exists
+   - Check if Nginx is installed; install if missing
+   - Verify the web root directory exists
+   - Create it if necessary
 
 3. **Deployment Process**
-   - Copy HTML/CSS/JS files from a specified local directory to the web root
+   - Copy HTML/CSS/JS files from source directory to web root
    - Set appropriate permissions for web files
-   - Create a simple backup of any existing files
-   - Handle common errors (missing source directory, permissions)
+   - Create a simple backup of any existing files before overwriting
+   - Handle common errors: missing source directory, permission issues
 
 4. **Service Management**
-   - Test Nginx configuration (`nginx -t`)
+   - Test Nginx configuration before restarting (`nginx -t`)
    - Restart the Nginx service
-   - Handle service restart failures
+   - Handle service restart failures gracefully
 
 5. **Verification**
-   - Send a simple HTTP GET request to localhost
-   - Check if the server responds with a 200 status code
-   - Display a success or failure message
+   - Send an HTTP GET request to localhost
+   - Check for a 200 status code response
+   - Display a clear success or failure message
 
-### **Stretch goal**
-- Add basic timestamp logging for each step
-- Implement a simple version numbering for deployments
-- Create a basic rollback function to restore the previous version
+### Stretch Goals
+
+- Add timestamp logging for each deployment step
+- Implement simple version numbering for deployments
+- Create a rollback function to restore the previous version
 
 ### Deliverables
-- Complete `deploy-site.sh` script
-- Sample HTML files for testing
-- Simple documentation explaining:
-  - How to use the script
-  - What each part of the script does
-  - Basic troubleshooting tips
 
-### Links
+- `deploy-site.sh` implementing all required steps
+- Sample HTML files for testing
+- Documentation covering: usage, what each part does, and troubleshooting tips
+
+### References
+
 - [Bash Scripting Tutorial](https://linuxconfig.org/bash-scripting-tutorial-for-beginners)
-- [Nginx Basics](https://nginx.org/en/docs/beginners_guide.html)
-- [HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
+- [Nginx Beginner's Guide](https://nginx.org/en/docs/beginners_guide.html)
 - [Linux File Permissions Explained](https://www.redhat.com/sysadmin/linux-file-permissions-explained)
-- [Introduction to Web Servers](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_web_server)
-- [Curl Command Tutorial](https://linuxize.com/post/curl-command-examples/)
+- [curl Command Examples](https://linuxize.com/post/curl-command-examples/)
+- [HTTP Status Codes - MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 
 ---
 
-Once you have completed this project, you will be able to automate basic website deployments using shell scripting - a fundamental skill that will prepare you for more advanced DevOps automation tasks in the future.
+Once you complete this task you will be able to automate basic website deployments using shell scripting - the same principle behind every CI/CD pipeline you will build in the Intermediate level.

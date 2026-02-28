@@ -1,125 +1,72 @@
 # #DevOpsDiary
 
+**A hands-on path to becoming a senior DevOps engineer.**
 
-Welcome to DevOpsDiary, an open-source platform designed to help you master DevOps through hands-on projects. From beginners exploring Git to advanced practitioners tackling Kubernetes, GitOPs, etc. DevOpsDiary offers tasks organized into Beginner, Intermediate, and Advanced levels. Join our community, complete projects, share your solutions, and grow your DevOps skills!
-
+No paywalls. No subscriptions. No bureaucracy. Just structured, practical tasks that build real skills.
 
 ---
 
+## How it works
 
-DevOpsDiary is an open-source initiative focused on making DevOps learning practical and engaging. Our goal is to provide real-world projects that bridge the gap between theory and practice, catering to learners at all stages, whether you're just starting out or refining advanced skills. With a community-driven approach, we encourage collaboration, solution-sharing, and continuous improvement.
+DevOpsDiary is organized into three levels. Each level is a sequence of tasks that build on each other - you cannot effectively do task 5 without having done tasks 1 through 4. That progression is intentional.
 
+**Beginner** - Linux, networking, scripting, Git, cloud CLI, and your first infrastructure project. This level alone covers what most people consider junior DevOps skills.
 
-## How to Get Started
+**Intermediate** - Docker, Kubernetes, Terraform, Ansible, CI/CD pipelines, GitOps, service mesh, security, and full observability. By the end you will operate a production-grade platform.
 
-1. Choose a Project
+**Advanced** - Platform engineering, FinOps, performance at scale, multi-cloud architecture, incident management, and everything expected from a senior DevOps engineer.
 
-    - Visit devopsdiary.site.
-    - Browse the Beginner, Intermediate, or Advanced sections.
-    - Pick a project (e.g., "Git Basics" or "CI/CD with GitHub Actions") and click "View Project" for instructions.
+---
 
-2. Organize Your Work
+## Getting started
 
-    You’re free to structure your projects however you like! Here’s one suggestion:
+1. Go to [devopsdiary.site](https://devopsdiary.site)
+2. Start at **Beginner** - even if you have experience, the early tasks build the foundation the rest of the path depends on
+3. Follow the tasks in order
+4. Build, break, fix, and document your work
 
-    - Central Repository: Set up a repo (e.g., devopsdiary-projects) divided by levels:
+There is no required format for how you complete tasks. Use any environment: local VM, cloud free tier, or your current work setup. The goal is that you actually do the work and understand what you built.
 
-    ```bash
-    devopsdiary-projects/
-    ├── beginner/
-    │   ├── 01-git/
-    │   ├── 02-docker/
-    │   └── ...
-    ├── intermediate/
-    │   ├── 01-ci-cd/
-    │   └── ...
-    └── advanced/
-        ├── 01-kubernetes/
-        └── ...
+---
 
-    ```
+## Sharing your work
 
-    Each folder (e.g., beginner/01-git/) should include your code and a README.md explaining your solution.
+If you want to share what you built:
 
-3. Complete the Project
+- Post on X with **#DevOpsDiary**
+- [Open an issue](https://github.com/everton-tenorio/DevOpsDiary/issues/new?template=project_submission.yml) with your repository link
 
-    - Follow the project instructions from the website.
-    - Implement your solution in your chosen repository.
-    - Update your project’s README.md with:
-        - The project title.
-        - A link to the DevOpsDiary project page (e.g., https://devopsdiary.site/beginner/01_git_basics).
-        - A short description of your solution.
+Your solutions may be featured on the site. This is optional - the learning happens whether you share or not.
 
+---
 
-Example:
+## Contributing
 
-```markdown
+DevOpsDiary is open source. Contributions are welcome:
 
-# Git Basics
+- **Add or improve tasks** - open a PR to `projects/`
+- **Fix bugs or improve the platform** - the site is built with Nuxt 4
+- **Review and validate tasks** - especially for Intermediate and Advanced levels
 
-Link: [DevOpsDiary Git Basics](https://devopsdiary.site/beginner/01_git_basics)
+Branch: `develop` → PR → review → merge to `main`
 
-## Solution
-- Initialized a repo with `git init`.
-- Created and merged branches using `git branch` and `git merge`.
-```
+Follow [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:`, `chore:`, `docs:`
 
-4. Submit Your Solution
-Share your work via GitHub Issues:
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-    - Go to Issues.
-    - Use the Project Submission template.
+---
 
-    - Provide:
-        - Project Title: e.g., "Git Basics".
-        - Level: Beginner, Intermediate, or Advanced.
-        - Repository Link: e.g., https://github.com/your-username/devopsdiary-projects/tree/main/beginner/01-git.
-        - Description: Summarize your approach.
+## Supporting the project
 
-    - Add labels like "beginner".
-    
-    - Submit the issue.
+DevOpsDiary is free and will stay free. If it has been useful to you:
 
-Note: Make your repo public so others can see your work!
+- ⭐ Star the repository
+- Share [devopsdiary.site](https://devopsdiary.site) with someone learning DevOps
+- [Sponsor on GitHub](https://github.com/sponsors/everton-tenorio)
 
-5. Engage with the Community
-
-    - Submitted projects may be showcased on devopsdiary.site/community.
-    - Share your progress on X with #DevOpsDiary!
-
-### 🤝 Contributing
-
-We welcome contributions to keep DevOpsDiary growing! You can:
-
-    - Add new projects to projects/.
-    - Fix bugs or improve the platform.
-    - Translate content for wider reach.
-
-How to Contribute:
-
-    - Fork this repository.
-    - Create a branch (e.g., feat/new-task).
-    - Follow Conventional Commits (e.g., feat: add docker task).
-    - Submit a Pull Request to develop.
-    - Check CONTRIBUTING.md for guidelines.
-
-### 💰 Support the Project
-DevOpsDiary is free and open-source, but your support helps sustain it:
-
-    - Sponsor: Donate via GitHub Sponsors.
-    - Promote: Share #DevOpsDiary with your network.
-    - Resources: Provide tools or mentorship.
-
-Every contribution keeps DevOpsDiary thriving!
-
---- 
-
-🛠️ Note for DevOps Professionals
-
-We’re calling on experienced DevOps experts to help validate our projects and contribute new tasks. Your expertise can ensure our content is accurate, relevant, and impactful. Please consider reviewing tasks or adding advanced challenges, join us in Discussions to get involved!
+---
 
 ## License
 
-Code: MIT License (LICENSE).
-
-Thanks for joining #DevOpsDiar, let’s learn DevOps together! 🚀
+Code: [MIT License](LICENSE)  
+Content (`projects/`): [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) - free to use and share, not for commercial use without permission.
