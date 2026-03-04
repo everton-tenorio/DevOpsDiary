@@ -4,12 +4,14 @@ import { enUS } from 'date-fns/locale'
 
 const route = useRoute()
 
-const { data: post } = await useAsyncData(
+const { data: post, status } = await useAsyncData(
   route.path,
   () => queryCollection('posts').path(route.path).first()
 )
 
 const isDarkMode = ref<boolean>(false)
+
+const isLoading = computed(() => status.value === 'pending' || status.value === 'idle')
 
 const formattedDate = computed<string>(() => {
   if (!post.value?.date) return ''
@@ -62,8 +64,17 @@ onMounted(() => {
 
 <template>
   <div :class="['min-h-screen transition-colors duration-200 ml-[-4%] mr-[-4%]', isDarkMode ? 'bg-[#1f2123]' : 'bg-gray-50']">
+
+    <!-- Loading state -->
+    <div v-if="isLoading" class="max-w-4xl mx-auto px-4 py-16 flex justify-center items-center min-h-[50vh]">
+      <div class="flex flex-col items-center gap-4">
+        <div class="w-8 h-8 border-2 border-green-500 border-t-transparent rounded-full animate-spin" />
+        <p :class="['font-mono text-sm', isDarkMode ? 'text-gray-400' : 'text-gray-500']">Loading...</p>
+      </div>
+    </div>
+
     <!-- Post not found -->
-    <div v-if="!post" class="max-w-4xl mx-auto px-4 py-16 text-center">
+    <div v-else-if="!post" class="max-w-4xl mx-auto px-4 py-16 text-center">
       <div class="text-6xl mb-6">🔍</div>
       <h1 :class="['text-3xl font-bold mb-4 font-mono', isDarkMode ? 'text-white' : 'text-gray-900']">
         Post not found
