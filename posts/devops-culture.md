@@ -2,7 +2,7 @@
 title: "Devops Culture"
 date: 2026-03-11
 slug: devops-culture
-description: ""
+description: "DevOps culture: from the Waterfall mess to Netflix breaking things on purpose."
 tags: ["devops", "CICD", "Agile", "SoftwareEngineering"]
 bannerImage: "/blog/devopslifecycle.png"
 ---
