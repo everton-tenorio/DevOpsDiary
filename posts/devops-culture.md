@@ -4,7 +4,7 @@ date: 2026-03-11
 slug: devops-culture
 description: ""
 tags: ["devops", "CICD", "Agile", "SoftwareEngineering"]
-bannerImage: "./devopslifecycle.png"
+bannerImage: "/devopslifecycle.png"
 ---
 
 Within the context of Software Engineering, we can observe that over time there have been many different ways to develop and deliver software. The constant evolution means that today software engineers can practically produce without typing a single line of code, thanks to artificial intelligence technologies, and deliver software knowing only the basics of infrastructure, thanks to platforms that offer infra as a service.
