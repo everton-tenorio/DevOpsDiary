@@ -4,7 +4,7 @@ date: 2026-03-22
 slug: os-fundamentals
 description: "Before doing anything with Docker, before writing a single Terraform file, before configuring a CI/CD pipeline, there is a layer on which everything runs."
 tags: ["devops", "linux", "bash"]
-bannerImage: "/blog/os-fundamentals.png"
+bannerImage: "https://devopsdiary.site/blog/os-fundamentals.png"
 ---
 
 Before doing anything with Docker, before writing a single Terraform file, before configuring a CI/CD pipeline, there is a layer on which everything runs. That layer is the operating system.
