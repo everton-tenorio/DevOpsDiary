@@ -217,7 +217,7 @@ onMounted(() => {
 .prose-dark :deep(h3) { @apply text-xl mb-3 mt-6; }
 .prose-dark :deep(p) { @apply mb-6 leading-relaxed text-gray-300; }
 .prose-dark :deep(a) { @apply text-green-400 hover:text-green-300 transition-colors underline; }
-.prose-dark :deep(pre) { @apply bg-gray-900 text-gray-200 rounded-lg px-6 py-4 overflow-x-auto border border-gray-700; }
+.prose-dark :deep(pre) { @apply bg-[black] text-gray-200 rounded-lg px-6 py-4 overflow-x-auto border border-gray-700; }
 .prose-dark :deep(code) { @apply bg-gray-900 text-red-400 px-2 py-1 rounded text-sm font-mono; }
 .prose-dark :deep(pre code) { @apply bg-transparent text-gray-200 px-0 py-0; }
 .prose-dark :deep(pre code)::before,
